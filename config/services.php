@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'nbu' => [
+        'exchange_url' => env('NBU_EXCHANGE_URL', 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange'),
+        'timeout' => (int) env('NBU_TIMEOUT', 10),
+    ],
+
 ];
