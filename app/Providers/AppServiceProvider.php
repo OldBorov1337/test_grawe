@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Services\ExchangeRate\ExchangeRateProvider;
 use App\Services\ExchangeRate\NbuExchangeRateProvider;
+use App\Services\Premium\PremiumCalculator;
+use App\Services\Premium\RuleRegistry;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,18 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(HttpClient::class),
                 config('services.nbu.exchange_url'),
                 config('services.nbu.timeout'),
+            );
+        });
+
+        $this->app->singleton(RuleRegistry::class, function () {
+            return new RuleRegistry(config('premium.rules', []));
+        });
+
+        $this->app->bind(PremiumCalculator::class, function ($app) {
+            return new PremiumCalculator(
+                $app->make(RuleRegistry::class),
+                $app->make(ExchangeRateProvider::class),
+                (int) config('premium.scale', 2),
             );
         });
     }

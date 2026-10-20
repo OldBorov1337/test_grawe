@@ -14,8 +14,7 @@ class InsuredPerson extends Model
         'name',
         'birth_date',
         'age',
-        'age_coefficient',
-        'discount_coefficient',
+        'coefficients',
         'premium_base',
         'premium_uah',
     ];
@@ -25,8 +24,7 @@ class InsuredPerson extends Model
         return [
             'birth_date' => 'date:Y-m-d',
             'age' => 'integer',
-            'age_coefficient' => 'decimal:3',
-            'discount_coefficient' => 'decimal:3',
+            'coefficients' => 'array',
             'premium_base' => 'decimal:2',
             'premium_uah' => 'decimal:2',
         ];

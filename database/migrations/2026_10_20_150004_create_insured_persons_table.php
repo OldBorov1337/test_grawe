@@ -14,8 +14,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('birth_date');
             $table->unsignedTinyInteger('age');
-            $table->decimal('age_coefficient', 6, 3);
-            $table->decimal('discount_coefficient', 6, 3);
+            $table->json('coefficients');
             $table->decimal('premium_base', 12, 2);
             $table->decimal('premium_uah', 12, 2);
             $table->timestamps();
