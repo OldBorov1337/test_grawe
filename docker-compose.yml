@@ -5,12 +5,6 @@ services:
     ports:
       - "8000:8000"
     environment:
-      APP_ENV: production
-      APP_DEBUG: "false"
-      APP_URL: http://localhost:8000
-      DB_CONNECTION: sqlite
-      DB_DATABASE: /var/data/database.sqlite
-      LOG_CHANNEL: stderr
       PHP_CLI_SERVER_WORKERS: "4"
     volumes:
       - sqlite-data:/var/data

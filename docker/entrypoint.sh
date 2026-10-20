@@ -4,14 +4,14 @@ set -e
 cd /var/www/html
 
 if [ ! -f .env ]; then
-    cp .env.example .env
+    cp docker/.env.docker .env
 fi
 
 if ! grep -qE '^APP_KEY=base64:' .env; then
     php artisan key:generate --force --no-interaction
 fi
 
-DB_FILE="${DB_DATABASE:-/var/www/html/database/database.sqlite}"
+DB_FILE="$(grep -E '^DB_DATABASE=' .env | cut -d= -f2-)"
 mkdir -p "$(dirname "$DB_FILE")"
 touch "$DB_FILE"
 
